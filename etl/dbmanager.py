@@ -1,47 +1,42 @@
-""" A file for managing the upload of dataframes into postgres database """
-
-import psycopg2 as psy
-from sqlalchemy import create_engine
-import pandas as pd 
+""" A file for managing the upload of dataframes into sqlite3 database """
+import sqlite3
+import pandas as pd
+import os
+from sqlite3 import Error
 
 
 class DBmanager:
-    """ a class for uploading dataframes into postgres """
-    
-    def __init__(self):
-        self.user = 'postgres'
-        self.password = 'admin123'
-        self.port = '5432'
-        self.database = 'main_db'
-        self.engine_param = 'postgresql+psycopg2://postgres:admin123@localhost:5432/main_db'
-    
-    def connection(self) -> object:
-        """ checks for connection to postgres database """
-        try:
-            connection = psy.connect(
-                user = self.user,
-                password = self.password,
-                port = self.port,
-                database = self.database
+    """ a class for uploading dataframes into sqlite3 database """
+    def create_db(self, db_name: str) -> bool:
+        """ creates a sqlite3 database """
+        #checks if db already exists 
+        if  os.path.isfile(db_name) is False:
+            try:
+                conn = sqlite3.connect(db_name)
+                return True
+            
+            except Error as e:
+                return e 
                 
-            )
-            return connection
-            print(f"Successful connection to {self.database}")
-        except(Exception,psy.Error) as error:
-            print(f"Unsuccessful connection to {self.database}")
-
-            
-    def upload_df(self,df: pd.DataFrame,name: str) -> None:
-        """ uploads dataframe into database """
-        con = self.connection()
-        engine = create_engine(self.engine_param)
-        df.to_sql(name,engine, if_exists='replace',index=False)
+            finally:
+                if conn:
+                    conn.close()
+               
+        #returns False if db exists 
+        else:
+            print(f"Database {db_name} already exists")
+            return False 
         
-    
-    def upload_nerdf(self, nerdf: pd.DataFrame) -> None:
-        """ uploads all of the ner dfs """ 
-        for series in nerdf:
-            self.upload_df(series,series.name)
-            
+    def connect(self, db_name: str) -> object:
+        """ Connects to a sqlite3 database """
+        try:
+            conn = sqlite3.connect(db_name)
+            return conn
         
-
+        except Error as e:
+            return e
+        
+    def df_to_db(self,db: str, df: pd.DataFrame,df_name: str) -> None:
+        conn = self.connect(db)
+        df.to_sql(df_name,conn,index=False,if_exists='fail')
+        conn.close()
