@@ -40,3 +40,16 @@ class DBmanager:
         conn = self.connect(db)
         df.to_sql(df_name,conn,index=False,if_exists='fail')
         conn.close()
+        
+    def dflist_to_db(self,db:str ,dflist: list[pd.DataFrame]) -> None:
+        table_names = []
+        for df in dflist:
+            table_names.append(df.name)
+        
+        for name,df in zip(table_names,dflist):
+            self.df_to_db(db,df,name)
+        
+        
+            
+        
+        
