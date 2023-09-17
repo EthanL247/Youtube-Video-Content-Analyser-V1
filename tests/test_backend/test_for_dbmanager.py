@@ -1,3 +1,4 @@
+""" Test file for dbmanager.py """
 import sys
 import sqlite3
 import os 
