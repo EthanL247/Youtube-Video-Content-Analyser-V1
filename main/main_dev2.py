@@ -7,9 +7,9 @@ from youtube_api.transcribe import Transcribe
 from nlp.nlp_sa import SA
 from etl.etlsa import EtlSA
 from etl.etldf import EtlDF
-import pandas as pd
-from etl.dbmanager import DBmanager
 from nlp.nlp_summarisation import Summariser
+from etl.dbmanager import DBmanager
+import pandas as pd
 
 
 
@@ -31,16 +31,18 @@ id = 'UCVjlpEjEY9GpksqbEesJnNA'
 """ testing 1 video """
 # meta
 location = channel_manage.get_videos(id)
-meta = video_manage.export_info(location)
+print(location[0]['snippet']['title'])
+# print(location)
+# meta = video_manage.export_info(location)
 
 
-#transcribe
-captions = scribe_manage.get_captions(meta,1)
+# #transcribe
+# captions = scribe_manage.get_captions(meta,1)
 
-#summarisation
-sum_data = sums.summarise(captions,1)
+# #summarisation
+# sum_data = sums.summarise(captions,1)
 
-#sa
+# # sa
 # sa_raw = nlp_sa.sa(captions,1)
 
 # #ner
