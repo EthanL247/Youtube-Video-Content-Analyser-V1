@@ -1,60 +1,96 @@
-from dash import Dash, dcc, html, Input, Output, callback
-import sys 
+"""
+This app creates a simple sidebar layout using inline style arguments and the
+dbc.Nav component.
 
-# adding modules path 
-sys.path.insert(0,'D:/python_projects/Youtube-Video-Analyser-GUI-Version/etl')
-sys.path.insert(1,'D:/python_projects/Youtube-Video-Analyser-GUI-Version/youtube_api')
-sys.path.insert(2,'D:/python_projects/Youtube-Video-Analyser-GUI-Version/nlp')
+dcc.Location is used to track the current location, and a callback uses the
+current location to render the appropriate page content. The active prop of
+each NavLink is set automatically according to the current pathname. To use
+this feature you must install dash-bootstrap-components >= 0.11.0.
 
-# import custom modules
-from ytchannel import Ytchannel 
-from ytvideo import Ytvideo 
-from transcribe import Transcribe 
-from nlp_ner import NER
-from nlp_sa import SA 
-from nlp_summarisation import Summariser 
-from etlner import EtlNER 
-from etlsa import EtlSA 
-from etldf import EtlDF 
-
-#initiasing 
-channel_helper = Ytchannel()
-video_helper = Ytvideo()
-transcribe_helper = Transcribe()
-ner_helper = NER()
-sa_helper = SA()
-sum_helper = Summariser()
-etlner_helper = EtlNER()
-etlsa_helper = EtlSA()
-etldf_helper = EtlDF()
+For more details on building multi-page Dash applications, check out the Dash
+documentation: https://dash.plot.ly/urls
+"""
+#loading libraries 
+import dash
+import dash_bootstrap_components as dbc
+from dash import Input, Output, dcc, html
+from dash_bootstrap_templates import ThemeSwitchAIO
 
 
+#initialising
+app = dash.Dash(external_stylesheets=[dbc.themes.COSMO])
 
-app = Dash(__name__)
-
-app.layout = html.Div([
-    html.H6("Change the value in the text box to see callbacks in action!"),
-    html.Div([
-        "Input: ",
-        dcc.Input(id='my-input', value='UCVjlpEjEY9GpksqbEesJnNA', type='text')
-    ]),
-    html.Br(),
-    html.Div(id='my-output'),
-
-])
-
-
-@callback(
-    Output(component_id='my-output', component_property='children'),
-    Input(component_id='my-input', component_property='value')
+#dark mode component
+theme_switch = ThemeSwitchAIO(
+    aio_id="theme", themes=[dbc.themes.COSMO, dbc.themes.CYBORG]
 )
-def res(input_value):
-    location = channel_helper.get_videos(input_value)
-    meta = video_helper.export_info(location)
-    captions = transcribe_helper.get_captions(meta,1)
 
-    return f'Output: {str(captions)}'
+# the style arguments for the sidebar. We use position:fixed and a fixed width
+SIDEBAR_STYLE = {
+    "position": "fixed",
+    "top": 0,
+    "left": 0,
+    "bottom": 0,
+    "width": "16rem",
+    "padding": "2rem 1rem",
+    "background-color": "##000000",
+}
+
+# the styles for the main content position it to the right of the sidebar and
+# add some padding.
+CONTENT_STYLE = {
+    "margin-left": "18rem",
+    "margin-right": "2rem",
+    "padding": "2rem 1rem",
+}
+
+sidebar = html.Div(
+    [
+        html.H2("Navigator", className="display-4"),
+        theme_switch,
+        html.Hr(),
+        html.P(
+            "Follow each page in order to start your anlaysis", className="lead"
+        ),
+        dbc.Nav(
+            [
+                dbc.NavLink(
+                    html.Div()
+                )
+                # dbc.NavLink("Home", href="/", active="exact"),
+                # dbc.NavLink("Page 1", href="/page-1", active="exact"),
+                # dbc.NavLink("Page 2", href="/page-2", active="exact"),
+            ],
+            vertical=True,
+            pills=True,
+        ),
+    ],
+    style=SIDEBAR_STYLE,
+)
+
+content = html.Div(id="page-content", style=CONTENT_STYLE)
+
+app.layout = html.Div([dcc.Location(id="url"),sidebar, content])
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
+# def render_page_content(pathname):
+#     if pathname == "/":
+#         return html.P("This is the content of the home page!")
+#     elif pathname == "/page-1":
+#         return html.P("This is the content of page 1. Yay!")
+#     elif pathname == "/page-2":
+#         return html.P("Oh cool, this is page 2!")
+#     # If the user tries to reach a different page, return a 404 message
+#     return html.Div(
+#         [
+#             html.H1("404: Not found", className="text-danger"),
+#             html.Hr(),
+#             html.P(f"The pathname {pathname} was not recognised..."),
+#         ],
+#         className="p-3 bg-light rounded-3",
+#     )
+
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
