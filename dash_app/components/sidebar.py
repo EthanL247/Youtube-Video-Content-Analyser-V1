@@ -17,7 +17,7 @@ class SideBar:
         "bottom": 0,
         "width": "16rem",
         "padding": "2rem 1rem",
-        "background-color": "",
+        "background-color": "#CCD1D1",
             }
         
         self.CONTENT_STYLE = {
@@ -35,7 +35,7 @@ class SideBar:
     def use(self):
         return html.Div(
             [
-                html.H2("Navigator", className="display-4"),
+                html.H2("Youtube Video Analyser", className="display-4"),
                 self.darkmode(),
                 html.Hr(),
                 html.P(
