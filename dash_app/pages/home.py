@@ -1,28 +1,20 @@
 import dash
-from dash import html, dcc, callback, Input, Output
+from dash import dcc, html
+from components.sidebar import SideBar
+
+dash.register_page(__name__, path='/')
+
+#initialising
+side_bar = SideBar()
 
 
-
-dash.register_page(__name__,path='/')
-
-layout = html.Div([
-    html.H1('This is our Analytics page'),
-    html.Div([
-        "Select a city: ",
-        dcc.RadioItems(
-            options=['New York City', 'Montreal', 'San Francisco'],
-            value='Montreal',
-            id='analytics-input'
-        )
-    ]),
-    html.Br(),
-    html.Div(id='analytics-output'),
-])
-
-
-@callback(
-    Output('analytics-output', 'children'),
-    Input('analytics-input', 'value')
-)
-def update_city_selected(input_value):
-    return f'You selected: {input_value}'
+layout = html.Div(
+    [
+        html.H1('Page 1'),
+    ],
+    style = {
+            "margin-left": "18rem",
+            "margin-right": "2rem",
+            "padding": "2rem 1rem",
+        }
+    )
