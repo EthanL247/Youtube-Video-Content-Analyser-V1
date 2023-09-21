@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 import time
 
 #registering page
-dash.register_page(__name__, order=2, name='Start Analysis')
+dash.register_page(__name__, order=2, name='Basic Analysis')
 
 
 #adding module paths
@@ -24,14 +24,14 @@ layout = html.Div(
         html.Br(),
         html.Br(),
         #inputes
-        dcc.Input(id="channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
-        dcc.Input(id="video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)'),
+        dcc.Input(id="basic_channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
+        dcc.Input(id="basic_video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)'),
         #button
-        html.Button(id='submit_button',n_clicks=0,children=' Analyse'),
+        html.Button(id='basic_submit_button',n_clicks=0,children='Start Basic Analysis'),
         
         #spinner
         dbc.Spinner(
-            dash_table.DataTable(id='output'),
+            dash_table.DataTable(id='basic_output'),
             color = 'success',
             spinner_style={"width": "5rem", "height": "5rem"},
             fullscreen=True,
@@ -49,12 +49,12 @@ layout = html.Div(
 
 @callback(
     [
-    Output(component_id='output',component_property='data'),
-    Output(component_id='output',component_property='columns')
+    Output(component_id='basic_output',component_property='data'),
+    Output(component_id='basic_output',component_property='columns')
     ],
-    Input('submit_button','n_clicks'),
-    [State('channel_id','value'),
-    State('video_name','value')],
+    Input('basic_submit_button','n_clicks'),
+    [State('basic_channel_id','value'),
+    State('basic_video_name','value')],
     prevent_initial_call=True,
 )
 

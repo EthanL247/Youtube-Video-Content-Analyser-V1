@@ -116,12 +116,3 @@ class MainManager:
         dbm.df_to_db(self.db_name,words,words_name)
         dbm.df_to_db(self.db_name,sa,sa_name)
         dbm.dflist_to_db(self.db_name,ner)
-        
-
-
-# channel= 'UCVjlpEjEY9GpksqbEesJnNA'
-# video= 'Uncle Roger LOVE The OG Uncle (Martin Yan)'
-# main = MainManager(channel,video)
-# # main.get_data()
-# df = main.get_target_data()
-# print(list(df.columns))
