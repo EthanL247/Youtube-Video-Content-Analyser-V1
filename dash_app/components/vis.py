@@ -48,6 +48,42 @@ class Visualise:
         df = self.get_channel_data()
         return dbc.Table.from_dataframe(df)
         
+    def channel_line_prep(self) -> object:
+        """ Tweaks channel for line plot """ 
+        df = self.get_channel_data()
+        # make history row so x axis oldest video first 
+        history = [i for i in range(len(df),0,-1)]
+        df['History'] = history
+        df.sort_values(by=['History'],inplace=True,ascending=True)
+        return df
+    
+    def channel_views(self) -> object:
+        """ Line plot of views """
+        df = self.channel_line_prep()
+        fig = px.line(
+            df, x='History',y='Views',
+            hover_name=('Title'),markers=True
+        )
+        return fig
+    
+    def channel_cl(self) -> object:
+        """ Line plot of comments and likes  """
+        df = self.channel_line_prep()
+        fig = px.line(
+            df, x='History',y=['Comments','Likes'],
+            hover_name=('Title'),markers=True
+        )
+        return fig
+    
+    def channel_engagement(self) ->object:
+        """ Line plot of channel engagement metrics"""
+        df = self.channel_line_prep()
+        fig = px.line(
+            df, x='History',y=['LikesPerView','CommentsPerView','LikesPerComment'],
+            hover_name=('Title'),markers=True
+        )
+        return fig
+        
         
     
     def caption(self) -> str:
@@ -91,11 +127,3 @@ class Visualise:
 
 
 
-# id = 'UCVjlpEjEY9GpksqbEesJnNA'
-# name = 'Uncle Roger LOVE The OG Uncle (Martin Yan)'
-# table = 'SA_Data'
-# main = MainManager(id,name)
-# vis = Visualise(id)
-
-# df = vis.get_channel_data()
-# print(df)

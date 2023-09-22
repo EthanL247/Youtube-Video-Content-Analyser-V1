@@ -35,7 +35,7 @@ layout = html.Div(
         html.Br(),
         ]),
     
-        #channel data 
+        #video data 
         html.Br(),
         html.H2('Channel Latest Video Analysis'),
         html.Br(),
@@ -46,8 +46,17 @@ layout = html.Div(
             ]
         ),
  
-        # video data visualisation
+        # channel data visualisation
         html.Div([
+            
+
+            
+            # Views time series 
+            dcc.Graph(id='views_line_output'),
+            dcc.Graph(id='commentlikes_line_output'),
+            dcc.Graph(id='engagement_line_output'),
+            
+            #basic metric line plot
         dbc.Spinner(
             html.Div(id='channel_output'),
             color = 'success',
@@ -67,6 +76,9 @@ layout = html.Div(
     [
     Output(component_id='video_output',component_property='children'),
     Output(component_id='channel_output',component_property='children'),
+    Output(component_id='views_line_output',component_property='figure'),
+    Output(component_id='commentlikes_line_output', component_property='figure'),
+    Output(component_id='engagement_line_output',component_property='figure'),
     ],
     Input('basic_submit_button','n_clicks'),
     [
@@ -92,7 +104,14 @@ def create_anlaysis(n_clicks,channel_id,video_name):
 
     cdf = vis.channel_table()
     
-    return vdf,cdf
+    #basic metric line plot 
+    views = vis.channel_views()
+    comment_likes = vis.channel_cl()
+    engagement = vis.channel_engagement()
+    
+    
+    
+    return vdf,cdf,views,comment_likes,engagement
     
     
 
