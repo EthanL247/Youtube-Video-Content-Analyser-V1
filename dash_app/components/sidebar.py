@@ -17,7 +17,7 @@ class SideBar:
         "bottom": 0,
         "width": "16rem",
         "padding": "2rem 1rem",
-        "background-color": "#CCD1D1",
+        "background-color": "#63486C",
             }
         
         self.CONTENT_STYLE = {

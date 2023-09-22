@@ -34,23 +34,34 @@ class Visualise:
         summary_entry = list(df['Summarised_Captions'].values)[0]
         summary_res = summary_entry.strip('[{]}:""')[17:]
         return summary_res
-        
-    
     
 
+    def get_loc(self) ->list[str]:
+        """ Gets all ner LOC data from db """
+        data = self.get_df('LOC').values
+        res = [item+' | ' for sublist in data for item in sublist]
+        return res
+    
+    def get_msc(self) ->list[str]:
+        """ Gets all ner MSC data from db """
+        data = self.get_df('MSC').values
+        res = [item+' | ' for sublist in data for item in sublist]
+        return res
+    
+    def get_org(self) ->list[str]:
+        """ Gets all ner ORG data from db """
+        data = self.get_df('ORG').values
+        res = [item+' | ' for sublist in data for item in sublist]
+        return res
+    
+    def get_per(self) ->list[str]:
+        """ Gets all ner PERdata from db """
+        data = self.get_df('Per').values
+        res = [item+' | ' for sublist in data for item in sublist]
+        return res
+
+
+    
+
     
     
-
-# id = 'UCVjlpEjEY9GpksqbEesJnNA'
-# name = 'Uncle Roger LOVE The OG Uncle (Martin Yan)'
-# table_name = 'Words_Data'
-
-
-# main = MainManager(id,name)
-# vis = Visualise(id)
-# print(vis.caption_vis())
-
-# df = vis.get_df('Words_Data')
-# entry = list(df['Summarised_Captions'].values)[0]
-# res = entry.strip('[{]}:""')[17:]
-# print(type(res))

@@ -24,7 +24,6 @@ class DBmanager:
                
         #returns False if db exists 
         else:
-            print(f"Database {db_name} already exists")
             return False 
         
     def connect(self, db_name: str) -> object:

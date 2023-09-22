@@ -41,6 +41,3 @@ layout = html.Div(
     )
 
 
-#call backs
-
-

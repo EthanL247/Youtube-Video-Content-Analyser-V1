@@ -24,10 +24,10 @@ layout = html.Div(
         html.Br(),
         html.Br(),
         #inputes
-        dcc.Input(id="basic_channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
-        dcc.Input(id="basic_video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)'),
+        dbc.Input(id="basic_channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
+        dbc.Input(id="basic_video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)',style={}),
         #button
-        html.Button(id='basic_submit_button',n_clicks=0,children='Start Basic Analysis'),
+        dbc.Button(id='basic_submit_button',n_clicks=0,children='Start Basic Analysis'),
         
         #spinner
         dbc.Spinner(
