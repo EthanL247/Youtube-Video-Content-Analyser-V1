@@ -24,6 +24,7 @@ class Visualise:
     """ A class for managing all visulisations via plotly """ 
     def __init__(self, channel_id: str):
         self.db = channel_id + '.db'
+        self.channel_id = channel_id 
     
     def get_df(self,table_name: str) -> pd.DataFrame:
         """ returns data as df from sqlite db """ 
@@ -32,6 +33,22 @@ class Visualise:
         df = pd.read_sql_query(query,conn)
         conn.close()
         return df
+    
+    def get_channel_data(self) -> pd.DataFrame:
+        """ Returns channel data """
+        conn = sqlite3.connect(self.db)
+        table_name = self.channel_id +'Channel_Data'
+        query = 'SELECT * FROM ' + table_name
+        df = pd.read_sql_query(query,conn)
+        conn.close()
+        return df
+    
+    def channel_table(self) -> object:
+        """ Displays channel data dataframe """
+        df = self.get_channel_data()
+        return dbc.Table.from_dataframe(df)
+        
+        
     
     def caption(self) -> str:
         """ Returns caption to be displayed """
@@ -80,6 +97,5 @@ class Visualise:
 # main = MainManager(id,name)
 # vis = Visualise(id)
 
-# df = vis.sa_wordcloud()
-# weights = list(df['Score']+1)
-# print(weights)
+# df = vis.get_channel_data()
+# print(df)

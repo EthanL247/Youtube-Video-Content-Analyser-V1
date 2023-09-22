@@ -105,7 +105,7 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     #initialising
     main = MainManager(channel_id,video_name)
     
-    # get target vide df
+    # get target video df
     df = main.get_target_data()
     cdf = dbc.Table.from_dataframe(df)
     
@@ -115,10 +115,6 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     
     # data for caption vis
     caption = vis.caption()
-    
-    #data video data vis 
-    data = df.to_dict(orient="records")
-    columns = [{'name': col, 'id': col} for col in list(df.columns)]
     
     """ NER vis """
     per = vis.per()
