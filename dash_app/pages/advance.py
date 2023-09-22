@@ -6,6 +6,7 @@ from dash import dcc, html, Input, Output, State, callback, dash_table
 import dash_bootstrap_components as dbc
 import time
 
+
 # registering page
 dash.register_page(__name__, order=3, name='Advanced Machine Learning Analysis')
 
@@ -34,7 +35,7 @@ layout = html.Div(
         html.Br(),
         ]),
         
-        #caption visualisation
+        #summarise visualisation
         html.Br(),
         html.Div([
         html.H2("Too long ; didn't watch summarisation result: "),
@@ -44,25 +45,35 @@ layout = html.Div(
         
         #ner visualisation
         html.Br(),
+        html.H2('Named-Entity Recognition Results'),
+        html.Br(),
         dbc.Row(
             [
                 #people
-                dbc.Row(html.P(id='per_output')),
-                dbc.Row(html.P(id='org_output')),
-                dbc.Row(html.P(id='loc_output')),
-                dbc.Row(html.P(id='msc_output')),  
+                dbc.Col(id='per_output'),
+                dbc.Col(id='org_output'),
+                dbc.Col(id='loc_output'),
+                dbc.Col(id='msc_output'),  
             ]
         ),
  
         # video data visualisation
         html.Div([
         dbc.Spinner(
-            dash_table.DataTable(id='advance_output'),
+            html.Div(id='advance_output'),
             color = 'success',
             spinner_style={"width": "10rem", "height": "10rem"},
             fullscreen=True,
         ),
         ]),
+        
+        
+        # SA data visualisation
+        html.Div(
+            [
+                dcc.Graph(id='sa_bar_output'),
+            ]
+        )
     ],
     style = {
             "margin-left": "18rem",
@@ -73,13 +84,13 @@ layout = html.Div(
 
 @callback(
     [
-    Output(component_id='advance_output',component_property='data'),
-    Output(component_id='advance_output',component_property='columns'),
+    Output(component_id='advance_output',component_property='children'),
     Output(component_id='summarise_output',component_property='children'),
     Output(component_id='per_output',component_property='children'),
     Output(component_id='org_output',component_property='children'),
     Output(component_id='loc_output',component_property='children'),
     Output(component_id='msc_output',component_property='children'),
+    Output(component_id='sa_bar_output',component_property='figure'),
     ],
     Input('advance_submit_button','n_clicks'),
     [
@@ -96,28 +107,31 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     
     # get target vide df
     df = main.get_target_data()
+    cdf = dbc.Table.from_dataframe(df)
     
     # initialising Visual manager
     vis = Visualise(channel_id)
     
     
     # data for caption vis
-    caption = vis.caption_vis()
+    caption = vis.caption()
     
     #data video data vis 
     data = df.to_dict(orient="records")
     columns = [{'name': col, 'id': col} for col in list(df.columns)]
     
-    """ NER Data Get """
-    # People
-    per = vis.get_per()
-    org = vis.get_org()
-    loc = vis.get_loc()
-    msc = vis.get_msc()
+    """ NER vis """
+    per = vis.per()
+    org = vis.org()
+    loc = vis.loc()
+    msc = vis.msc()
+    
+    """ SA vis """
+    sa_bar = vis.sa_bar()
 
     
     
-    return data,columns,caption,per,org,loc,msc
+    return cdf,caption,per,org,loc,msc,sa_bar
     
     
 

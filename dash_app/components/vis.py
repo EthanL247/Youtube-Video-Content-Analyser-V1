@@ -6,6 +6,11 @@ import os
 import sys
 import pandas as pd
 import sqlite3
+import dash_bootstrap_components as dbc
+import plotly.express as px 
+import random
+import plotly.graph_objs as go
+
 
 
 #adding module paths
@@ -28,7 +33,7 @@ class Visualise:
         conn.close()
         return df
     
-    def caption_vis(self) -> str:
+    def caption(self) -> str:
         """ Returns caption to be displayed """
         df = self.get_df('Words_Data')
         summary_entry = list(df['Summarised_Captions'].values)[0]
@@ -36,32 +41,45 @@ class Visualise:
         return summary_res
     
 
-    def get_loc(self) ->list[str]:
+    def loc(self) ->object:
         """ Gets all ner LOC data from db """
-        data = self.get_df('LOC').values
-        res = [item+' | ' for sublist in data for item in sublist]
-        return res
+        df = self.get_df('LOC')
+        return dbc.Table.from_dataframe(df)
     
-    def get_msc(self) ->list[str]:
+    def msc(self) ->object:
         """ Gets all ner MSC data from db """
-        data = self.get_df('MSC').values
-        res = [item+' | ' for sublist in data for item in sublist]
-        return res
+        df = self.get_df('MSC')
+        return dbc.Table.from_dataframe(df)
     
-    def get_org(self) ->list[str]:
+    def org(self) -> object :
         """ Gets all ner ORG data from db """
-        data = self.get_df('ORG').values
-        res = [item+' | ' for sublist in data for item in sublist]
-        return res
+        df = self.get_df('ORG')
+        return dbc.Table.from_dataframe(df)
     
-    def get_per(self) ->list[str]:
+    def per(self) -> object:
         """ Gets all ner PERdata from db """
-        data = self.get_df('Per').values
-        res = [item+' | ' for sublist in data for item in sublist]
-        return res
-
-
+        df = self.get_df('Per')
+        return dbc.Table.from_dataframe(df)
+    
+    def sa_bar(self) -> object:
+        """ Generates barchart figure """
+        df = self.get_df('SA_Data').transpose()
+        df.reset_index(inplace=True)
+        df.columns = ['Emotions','Score']
+        df.sort_values(by=['Score'],inplace=True, ascending=False)
+        fig = px.bar(df, x='Emotions',y='Score',color='Score')
+        return fig 
     
 
-    
-    
+
+
+
+# id = 'UCVjlpEjEY9GpksqbEesJnNA'
+# name = 'Uncle Roger LOVE The OG Uncle (Martin Yan)'
+# table = 'SA_Data'
+# main = MainManager(id,name)
+# vis = Visualise(id)
+
+# df = vis.sa_wordcloud()
+# weights = list(df['Score']+1)
+# print(weights)
