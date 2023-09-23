@@ -27,28 +27,30 @@ layout = html.Div(
         #advance content
         html.Div(
             [
-                html.H2('Advance Machine Learning Analysis Features:'),
+                html.H2('Advance Machine Learning Analysis Features'),
+                html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
                 html.Br(),
                 dbc.Row(
                     [
                         dbc.Col(
                             [
                                 html.Li('Summarisation',style={'font-weight': 'bold','font-size':'20px',}),
-                                html.P('Summarise an entire videos caption to just a few sentences',style={'font-size':'17px'}), 
+                                html.P('Summarise an entire videos caption to just a few sentences.',style={'font-size':'17px'}), 
                             ]
                         ),
                         dbc.Col(
                             [
                                 html.Li('Named-Entity Recognition (NER)',style={'font-weight': 'bold','font-size':'20px',}),
-                                html.P('Extracts most mentioned individuals name, organisation and location from a video',style={'font-size':'17px'}), 
+                                html.P('Extracts most mentioned individuals name, organisation and location from a video.',style={'font-size':'17px'}), 
                             ]
                         ),
                         dbc.Col(
                             [
                                 html.Li('Sentiment Analysis (SA)',style={'font-weight': 'bold','font-size':'20px',}),
-                                html.P('Displays the most releveant emotions invoked by a video',style={'font-size':'17px'}), 
+                                html.P('Extracts the most releveant emotions invoked by a video.',style={'font-size':'17px'}), 
                             ]
                         ),
+                        
                     ]
                 )
                 
@@ -58,14 +60,15 @@ layout = html.Div(
         
         #basic content
         html.Br(),
-        html.H2('Basic Analysis Features:'),
+        html.H2('Basic Analysis Features'),
+        html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
         dbc.Row(
             [
                 dbc.Col(
                     [
                         html.Li('Simple Metrics',style={'font-weight': 'bold','font-size':'20px',}),
                         html.P('Plots view, like and comment counts across 50 latest videos.',style={'font-size':'17px'}),
-                    ], width=5
+                    ], width=4
                 ),
                 
                 dbc.Col(
@@ -77,6 +80,12 @@ layout = html.Div(
                     
                     
                     ),
+                dbc.Col(
+                            [
+                                html.Li('Other Video Data Acess',style={'font-weight': 'bold','font-size':'20px',}),
+                                html.P('Extracts data from other videos uploaded within a 50 videos upload window.',style={'font-size':'17px'}), 
+                            ]
+                        ),
                     ]
                 ),
         #Limitations

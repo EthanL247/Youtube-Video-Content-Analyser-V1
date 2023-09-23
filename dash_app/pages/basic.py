@@ -24,27 +24,34 @@ layout = html.Div(
     children=[   
         #input section 
         html.Div([
-        html.H1('Enter Channel ID and Youtube Video Name'),
-        html.Br(),
+        html.H1('BasicAnalysis Page'),
         html.Br(),
         #inputs
+        html.P('Due to the 6-8 minutes of processing time. Demo values below will display pre-analysed results',style={'color':'red'}),
+        html.P('Paste Channel ID',style={'font-weight': 'bold','font-size':'17px',}),
+        html.P(['You can search up a channels ID by name via this link ',\
+        html.A('Youtube Channel ID Searcher',href='https://commentpicker.com/youtube-channel-id.php',target="_blank")]),
         dbc.Input(id="basic_channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
+        html.Br(),
+        html.P('Paste Video Name',style={'font-weight': 'bold','font-size':'17px',}),
         dbc.Input(id="basic_video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)'),
         #Submit button
+        html.Br(),
         dbc.Button(id='basic_submit_button',n_clicks=0,children='Start Basic Analysis'),
         html.Br(),
         ]),
     
         #video data 
         html.Br(),
-        html.H2('Channel Latest Video Analysis'),
-        html.Br(),
+        html.H2('Video Data'),
+        html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
         dbc.Row(
             [
                 #people
                 dbc.Col(id='video_output'),
             ]
         ),
+        html.Br(),
  
         # channel data visualisation
         html.Div([
@@ -52,11 +59,19 @@ layout = html.Div(
 
             
             # Views time series 
+            html.H2('Simple Trends'),
+            html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
             dcc.Graph(id='views_line_output'),
             dcc.Graph(id='commentlikes_line_output'),
+            html.Br(),
+            
+            html.H2('Engagement Trends'),
+            html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
             dcc.Graph(id='engagement_line_output'),
             
-            #basic metric line plot
+        #other videos 
+        html.H2('Same Upload Window Related Videos'),
+        html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
         dbc.Spinner(
             html.Div(id='channel_output'),
             color = 'success',

@@ -24,21 +24,37 @@ layout = html.Div(
     children=[   
         #input section 
         html.Div([
-        html.H1('Enter Channel ID and Youtube Video Name'),
-        html.Br(),
+        html.H1('Advance Machine Learning Analysis Page'),
         html.Br(),
         #inputs
+        html.P('Due to the 6-8 minutes of processing time. Demo values below will display pre-analysed results',style={'color':'red'}),
+        html.P('Paste Channel ID',style={'font-weight': 'bold','font-size':'17px',}),
+        html.P(['You can search up a channels ID by name via this link ',\
+            html.A('Youtube Channel ID Searcher',href='https://commentpicker.com/youtube-channel-id.php',target="_blank")]),
         dbc.Input(id="advance_channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
+        html.Br(),
+        html.P('Paste Video Name',style={'font-weight': 'bold','font-size':'17px',}),
         dbc.Input(id="advance_video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)'),
+        html.Br(),
         #Submit button
         dbc.Button(id='advance_submit_button',n_clicks=0,children='Start Advance Analysis'),
         html.Br(),
         ]),
         
+        html.Br(),
+        html.Div(
+            [
+                html.H2("Video Data"),
+                html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
+                html.Div(id='advance_output')
+            ]
+        ),
+        html.Br(),
         #summarise visualisation
         html.Br(),
         html.Div([
-        html.H2("Too long ; didn't watch summarisation result: "),
+        html.H2("Too Long ; Didn't Watch Summarisation Result"),
+        html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
         html.Div(id='summarise_output', className="lead"),
         html.Br(),
         ]),
@@ -46,6 +62,7 @@ layout = html.Div(
         #ner visualisation
         html.Br(),
         html.H2('Named-Entity Recognition Results'),
+        html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
         html.Br(),
         dbc.Row(
             [
@@ -56,22 +73,18 @@ layout = html.Div(
                 dbc.Col(id='msc_output'),  
             ]
         ),
- 
-        # video data visualisation
-        html.Div([
-        dbc.Spinner(
-            html.Div(id='advance_output'),
-            color = 'success',
-            spinner_style={"width": "10rem", "height": "10rem"},
-            fullscreen=True,
-        ),
-        ]),
-        
-        
         # SA data visualisation
         html.Div(
-            [
-                dcc.Graph(id='sa_bar_output'),
+            [   
+                html.H2('Sentiment Analysis Results'),
+                html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
+                dbc.Spinner(
+                    dcc.Graph(id='sa_bar_output'),
+                    color = 'success',
+                    spinner_style={"width": "10rem", "height": "10rem"},
+                    fullscreen=True,
+                ),
+                
             ]
         )
     ],
