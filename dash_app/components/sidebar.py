@@ -17,7 +17,8 @@ class SideBar:
         "bottom": 0,
         "width": "16rem",
         "padding": "2rem 1rem",
-        "background-color": "#63486C",
+        'border':'5px grey solid',
+        'border-radius': '10px',
             }
         
         self.CONTENT_STYLE = {
@@ -55,4 +56,5 @@ class SideBar:
                 )
             ],
             style = self.SIDEBAR_STYLE,
+    
         )
