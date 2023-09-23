@@ -62,7 +62,7 @@ class MainManager:
             dbm.df_to_db(self.db_name,videos_df,table_name)
         else:
             return False
-        
+            
     def _df_from_sql(self) -> pd.DataFrame:
         """ returns data as df from sqlite db """ 
         conn = sqlite3.connect(self.db_name)
@@ -76,8 +76,11 @@ class MainManager:
     def get_target_data(self) -> pd.Series:
         """ Gets the target video data from sqlite video data """
         df = self._df_from_sql()
-        target = df.loc[(df['Title'] == self.video_name)].copy(deep=True)
-        return target
+        if self.video_name in df['Title'].values:
+            target = df.loc[(df['Title'] == self.video_name)].copy(deep=True)
+            return target
+        else:
+            return None
     
     def _get_caption(self) -> None:
         """ gets caption from target video data """
@@ -116,3 +119,9 @@ class MainManager:
         dbm.df_to_db(self.db_name,words,words_name)
         dbm.df_to_db(self.db_name,sa,sa_name)
         dbm.dflist_to_db(self.db_name,ner)
+        
+# id = 'UCVjlpEjEY9GpksqbEesJnNA'
+# video ='Uncle Roger LOVE The OG Uncle (Martin Yan)'
+# test = MainManager(id,video)
+# v = test.get_target_data()
+# print(v)

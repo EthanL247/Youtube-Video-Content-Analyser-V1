@@ -55,14 +55,17 @@ layout = html.Div(
         html.Div([
         html.H2("Too Long ; Didn't Watch Summarisation Result"),
         html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
-        html.Div(id='summarise_output', className="lead"),
-        html.Br(),
+        html.B(id='summarise_output', style={'font-size':'1.428571rem'})
         ]),
+        html.Br(),
+        html.Br(),
+        html.Br(),
         
         #ner visualisation
-        html.Br(),
+
         html.H2('Named-Entity Recognition Results'),
         html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
+        html.B('Table values are ordered from most mentioned to least',style={'font-size':'1rem'}),
         html.Br(),
         dbc.Row(
             [

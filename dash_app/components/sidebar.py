@@ -36,12 +36,12 @@ class SideBar:
     def use(self):
         return html.Div(
             [
-                html.H2("Youtube Video Analyser", className="display-4"),
+                html.H2("Youtube Video Analyser Version", className="display-5"),
+                html.H3('Version 1.0'),
                 self.darkmode(),
-                html.Hr(),
-                html.P(
-                    " Use the pages below in order to start your analysis", className="lead"
-                ),
+                html.Br(),
+                html.Br(),
+                html.Br(),
                 dbc.Nav(
                     [
                         dbc.NavLink(
@@ -53,7 +53,20 @@ class SideBar:
                     ],
                     vertical = True,
                     pills = True,
-                )
+                ),
+                #credits
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Hr(style={'borderWidth': "1px", "width": "100%", "color": "#28948c"}),
+                html.Div([
+                    html.B('Made By Ethan C Liu'),
+                    html.Br(),
+                    html.A('LinkedIn',href='https://www.linkedin.com/in/ecl97/',target="_blank"),
+                    html.Br(),
+                    html.A('GitHub',href='https://github.com/EthanL247',target="_blank"),
+                    
+                ])
             ],
             style = self.SIDEBAR_STYLE,
     

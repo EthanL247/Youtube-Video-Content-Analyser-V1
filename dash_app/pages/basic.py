@@ -24,25 +24,25 @@ layout = html.Div(
     children=[   
         #input section 
         html.Div([
-        html.H1('BasicAnalysis Page'),
-        html.Br(),
+        html.H1('Basic Analysis Page'),
+        html.Br(style={"line-height": "5px"}),
         #inputs
         html.P('Due to the 6-8 minutes of processing time. Demo values below will display pre-analysed results',style={'color':'red'}),
+        html.P('Video name must be exactly the same as the title on the video page',style={'color':'red'}),
         html.P('Paste Channel ID',style={'font-weight': 'bold','font-size':'17px',}),
         html.P(['You can search up a channels ID by name via this link ',\
         html.A('Youtube Channel ID Searcher',href='https://commentpicker.com/youtube-channel-id.php',target="_blank")]),
         dbc.Input(id="basic_channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
-        html.Br(),
+        html.Br(style={"line-height": "5"}),
         html.P('Paste Video Name',style={'font-weight': 'bold','font-size':'17px',}),
         dbc.Input(id="basic_video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)'),
         #Submit button
-        html.Br(),
+        html.Br(style={"line-height": "5px"}),
         dbc.Button(id='basic_submit_button',n_clicks=0,children='Start Basic Analysis'),
-        html.Br(),
         ]),
     
         #video data 
-        html.Br(),
+        html.Br(style={"line-height": "5px"}),
         html.H2('Video Data'),
         html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
         dbc.Row(
@@ -51,7 +51,7 @@ layout = html.Div(
                 dbc.Col(id='video_output'),
             ]
         ),
-        html.Br(),
+        html.Br(style={"line-height": "20px"}),
  
         # channel data visualisation
         html.Div([
@@ -60,14 +60,16 @@ layout = html.Div(
             
             # Views time series 
             html.H2('Simple Trends'),
+            html.H4('Hover over data points in any graphto see the data values of a video.',style={'color':'red'}),
             html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
             dcc.Graph(id='views_line_output'),
             dcc.Graph(id='commentlikes_line_output'),
-            html.Br(),
+            html.Br(style={"line-height": "20"}),
             
             html.H2('Engagement Trends'),
             html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
             dcc.Graph(id='engagement_line_output'),
+            html.Br(style={"line-height": "20"}),
             
         #other videos 
         html.H2('Same Upload Window Related Videos'),
@@ -110,7 +112,7 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     
     # get target video df
     df = main.get_target_data()
-    vdf = dbc.Table.from_dataframe(df)
+    vdf = dbc.Table.from_dataframe(df, striped=True)
     
     # initialising Visual manager
     vis = Visualise(channel_id)
@@ -123,8 +125,7 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     views = vis.channel_views()
     comment_likes = vis.channel_cl()
     engagement = vis.channel_engagement()
-    
-    
+
     
     return vdf,cdf,views,comment_likes,engagement
     

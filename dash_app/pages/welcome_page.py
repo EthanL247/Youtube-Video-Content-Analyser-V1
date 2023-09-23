@@ -9,6 +9,11 @@ import dash_bootstrap_components as dbc
 #initialising
 dash.register_page(__name__, name='Welcome Page', order=1,path='/')
 
+
+#get pictures 
+image1 = 'assets/basic_demo.png'
+image2 = 'assets/sa_demo.png'
+
 #Layout 
 
 layout = html.Div(
@@ -57,8 +62,11 @@ layout = html.Div(
                    
             ]
         ),
+        html.Img(src=image2),
         
         #basic content
+        html.Br(),
+        html.Br(),
         html.Br(),
         html.H2('Basic Analysis Features'),
         html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
@@ -88,6 +96,7 @@ layout = html.Div(
                         ),
                     ]
                 ),
+        html.Img(src=image1),
         #Limitations
         html.Div(
             [

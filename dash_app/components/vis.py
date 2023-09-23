@@ -46,7 +46,10 @@ class Visualise:
     def channel_table(self) -> object:
         """ Displays channel data dataframe """
         df = self.get_channel_data()
-        return dbc.Table.from_dataframe(df)
+        return dbc.Table.from_dataframe(
+            df,
+            striped=True,
+            )
         
     def channel_line_prep(self) -> object:
         """ Tweaks channel for line plot """ 
@@ -60,28 +63,61 @@ class Visualise:
     def channel_views(self) -> object:
         """ Line plot of views """
         df = self.channel_line_prep()
+        title="Channel Views Across The 50 Last Videos Uploaded"
         fig = px.line(
             df, x='History',y='Views',
-            hover_name=('Title'),markers=True
-        )
+            hover_name=('Title'),markers=True,
+            color_discrete_sequence=['#FFB7B7'],
+            )
+        fig.update_layout(
+            font={'size':20},
+            title={'text':'<b>'+title+'<b>','font':{'size':20}},
+            xaxis_title="Last 50 Videos Uploaded Time Line",
+            yaxis_title="Views",
+        ),
+        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='black')
+        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='black')
+        fig.update_traces(marker=dict(size=12)),
         return fig
     
     def channel_cl(self) -> object:
         """ Line plot of comments and likes  """
         df = self.channel_line_prep()
+        title='Comments and Likes Across The Last 50 Videos Uploaded'
         fig = px.line(
             df, x='History',y=['Comments','Likes'],
-            hover_name=('Title'),markers=True
+            hover_name=('Title'),markers=True,
+            color_discrete_sequence=['#FFB7B7','#96C291'],
+            
         )
+        fig.update_layout(
+            font={'size':20},
+            title={'text':'<b>'+title+'<b>','font':{'size':20}},
+            xaxis_title="Last 50 Videos Uploaded Time Line",
+            yaxis_title="Count")
+        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='black')
+        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='black')
+        fig.update_traces(marker=dict(size=12))
+        
         return fig
     
     def channel_engagement(self) ->object:
         """ Line plot of channel engagement metrics"""
         df = self.channel_line_prep()
+        title='Video Engagement Across The Last 50 Videos Uploaded'
         fig = px.line(
             df, x='History',y=['LikesPerView','CommentsPerView','LikesPerComment'],
-            hover_name=('Title'),markers=True
+            hover_name=('Title'),markers=True,
+            color_discrete_sequence=['#96C291','#FFDBAA','#FFB7B7',],
         )
+        fig.update_layout(
+            font={'size':20},
+            title={'text':'<b>'+title+'<b>','font':{'size':20}},
+            xaxis_title="Last 50 Videos Uploaded Time Line",
+            yaxis_title="Count")
+        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='black')
+        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='black')
+        fig.update_traces(marker=dict(size=12))
         return fig
         
         
@@ -97,30 +133,46 @@ class Visualise:
     def loc(self) ->object:
         """ Gets all ner LOC data from db """
         df = self.get_df('LOC')
-        return dbc.Table.from_dataframe(df)
+        df.columns=['Most Mentioned Locations']
+        return dbc.Table.from_dataframe(df, striped=True)
     
     def msc(self) ->object:
         """ Gets all ner MSC data from db """
         df = self.get_df('MSC')
-        return dbc.Table.from_dataframe(df)
+        df.columns=['Other Most Mentioned Nouns']
+        return dbc.Table.from_dataframe(df,striped=True)
     
     def org(self) -> object :
         """ Gets all ner ORG data from db """
         df = self.get_df('ORG')
-        return dbc.Table.from_dataframe(df)
+        df.columns=['Most Mentioned Organisations']
+        return dbc.Table.from_dataframe(df,striped=True)
     
     def per(self) -> object:
         """ Gets all ner PERdata from db """
         df = self.get_df('Per')
-        return dbc.Table.from_dataframe(df)
+        df.columns=['Most Mentioned Individuals']
+        return dbc.Table.from_dataframe(df,striped=True)
     
     def sa_bar(self) -> object:
         """ Generates barchart figure """
         df = self.get_df('SA_Data').transpose()
         df.reset_index(inplace=True)
         df.columns = ['Emotions','Score']
-        df.sort_values(by=['Score'],inplace=True, ascending=False)
-        fig = px.bar(df, x='Emotions',y='Score',color='Score')
+        df.sort_values(by=['Score'],inplace=True, ascending=True)
+        fig = px.bar(df, x='Score',y='Emotions',color='Score',orientation='h')
+        title = 'Sentiment Analysis Bar Chart'
+        fig.update_layout(
+            font={'size':20},
+            title={'text':'<b>'+title+'<b>','font':{'size':20}},
+            xaxis_title="Score",
+            yaxis_title="Emotions",
+            width=1500,
+            height=800,
+        ),
+        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='black')
+        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='black',tickmode='linear')
+        
         return fig 
     
 
