@@ -27,15 +27,18 @@ layout = html.Div(
         html.H1('Basic Analysis Page'),
         html.Br(style={"line-height": "5px"}),
         #inputs
-        html.P('Due to the 6-8 minutes of processing time. Demo values below will display pre-analysed results',style={'color':'red'}),
-        html.P('Video name must be exactly the same as the title on the video page',style={'color':'red'}),
+        html.H4('Usage Guidelines: '),
+        html.Li('Basic analysis takes 1-2 minutes. Demo values below will display pre-analysed results.',style={'color':'red'}),
+        html.Li('Video name must be exactly the same as the title on the video page.',style={'color':'red'}),
+        html.Li('If input is correct, loading screen and results will appear, if not then input is incorrect.',style={'color':'red'}),
+        html.Br(),
         html.P('Paste Channel ID',style={'font-weight': 'bold','font-size':'17px',}),
         html.P(['You can search up a channels ID by name via this link ',\
         html.A('Youtube Channel ID Searcher',href='https://commentpicker.com/youtube-channel-id.php',target="_blank")]),
         dbc.Input(id="basic_channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
         html.Br(style={"line-height": "5"}),
         html.P('Paste Video Name',style={'font-weight': 'bold','font-size':'17px',}),
-        dbc.Input(id="basic_video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)'),
+        dbc.Input(id="basic_video_name",type="text",value='Uncle Roger Review OG UNCLE Mongolian Beef (Martin Yan)'),
         #Submit button
         html.Br(style={"line-height": "5px"}),
         dbc.Button(id='basic_submit_button',n_clicks=0,children='Start Basic Analysis'),
@@ -109,16 +112,18 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     """ Creates analysis object """
     #initialising
     main = MainManager(channel_id,video_name)
-    
-    # get target video df
-    df = main.get_target_data()
-    vdf = dbc.Table.from_dataframe(df, striped=True)
-    
     # initialising Visual manager
     vis = Visualise(channel_id)
     
-    """ NER vis """
-
+    #getting channel data 
+    main.get_data()
+    
+    # get target video df
+    df = main.get_target_data()
+    
+    """ Visualisations """
+    vdf = dbc.Table.from_dataframe(df, striped=True)
+    
     cdf = vis.channel_table()
     
     #basic metric line plot 

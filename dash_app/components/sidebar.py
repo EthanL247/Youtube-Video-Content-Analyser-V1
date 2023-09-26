@@ -36,10 +36,9 @@ class SideBar:
     def use(self):
         return html.Div(
             [
-                html.H2("Youtube Video Analyser Version", className="display-5"),
+                html.H3("Youtube Video Analyser Version", className="display-5"),
                 html.H3('Version 1.0'),
                 self.darkmode(),
-                html.Br(),
                 html.Br(),
                 html.Br(),
                 dbc.Nav(
@@ -55,8 +54,6 @@ class SideBar:
                     pills = True,
                 ),
                 #credits
-                html.Br(),
-                html.Br(),
                 html.Br(),
                 html.Hr(style={'borderWidth': "1px", "width": "100%", "color": "#28948c"}),
                 html.Div([

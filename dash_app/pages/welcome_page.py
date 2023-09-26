@@ -40,29 +40,29 @@ layout = html.Div(
                         dbc.Col(
                             [
                                 html.Li('Summarisation',style={'font-weight': 'bold','font-size':'20px',}),
-                                html.P('Summarise an entire videos caption to just a few sentences.',style={'font-size':'17px'}), 
+                                html.P('Summarise an entire videos caption to just a few sentences.',style={'font-size':'17px'}),  
                             ]
                         ),
                         dbc.Col(
                             [
                                 html.Li('Named-Entity Recognition (NER)',style={'font-weight': 'bold','font-size':'20px',}),
-                                html.P('Extracts most mentioned individuals name, organisation and location from a video.',style={'font-size':'17px'}), 
+                                html.P('Extracts most mentioned individuals name, organisation and location from a video.',style={'font-size':'17px'}),
+                
                             ]
                         ),
                         dbc.Col(
                             [
                                 html.Li('Sentiment Analysis (SA)',style={'font-weight': 'bold','font-size':'20px',}),
-                                html.P('Extracts the most releveant emotions invoked by a video.',style={'font-size':'17px'}), 
+                                html.P('Extracts the most releveant emotions invoked by a video.',style={'font-size':'17px'}),   
                             ]
                         ),
                         
                     ]
-                )
-                
+                ),
+                html.Img(src=image2, style ={'width':'90%','height':'65%'}),
                    
             ]
         ),
-        html.Img(src=image2),
         
         #basic content
         html.Br(),
@@ -90,7 +90,7 @@ layout = html.Div(
                     ),
                 dbc.Col(
                             [
-                                html.Li('Other Video Data Acess',style={'font-weight': 'bold','font-size':'20px',}),
+                                html.Li('Related Video Access',style={'font-weight': 'bold','font-size':'20px',}),
                                 html.P('Extracts data from other videos uploaded within a 50 videos upload window.',style={'font-size':'17px'}), 
                             ]
                         ),
@@ -100,12 +100,13 @@ layout = html.Div(
         #Limitations
         html.Div(
             [
-                html.H4('Limitations',style={'color':'red'}),
+                html.H2('Limitations',style={'color':'red'}),
                 html.P('Current state of the web app is considered a vertical slice and  development is on going.\
                     Therefore the following limitations exists:'),
                 html.Li('Advance machine learning analysis takes approximated 6-8 minutes to process per video due to the libraries used.'),
-                html.Li('Only the latest 50 videos of any channel can be used on this web app due to Youtube API limitations.')
-            ]
+                html.Li('Only the latest 50 videos of any channel can be used on this web app due to Youtube API limitations.'),
+                html.Li('No dedicated error page if channel id or video name is misspelt.'),
+            ],style={'font-size':'20px'}
         ),
     ],
     style = {

@@ -81,6 +81,7 @@ class MainManager:
             return target
         else:
             return None
+        return df
     
     def _get_caption(self) -> None:
         """ gets caption from target video data """
@@ -120,8 +121,4 @@ class MainManager:
         dbm.df_to_db(self.db_name,sa,sa_name)
         dbm.dflist_to_db(self.db_name,ner)
         
-# id = 'UCVjlpEjEY9GpksqbEesJnNA'
-# video ='Uncle Roger LOVE The OG Uncle (Martin Yan)'
-# test = MainManager(id,video)
-# v = test.get_target_data()
-# print(v)
+        

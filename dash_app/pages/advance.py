@@ -27,14 +27,18 @@ layout = html.Div(
         html.H1('Advance Machine Learning Analysis Page'),
         html.Br(),
         #inputs
-        html.P('Due to the 6-8 minutes of processing time. Demo values below will display pre-analysed results',style={'color':'red'}),
+        html.H4('Usage Guidelines: '),
+        html.Li('Advance analysis takes 6-8 minutes of processing time. Demo values below will display pre-analysed results.',style={'color':'red'}),
+        html.Li('Video name must be exactly the same as the title on the video page.',style={'color':'red'}),
+        html.Li('If input is correct, loading screen and results will appear, if not then input is incorrect.',style={'color':'red'}),
+        html.Br(),
         html.P('Paste Channel ID',style={'font-weight': 'bold','font-size':'17px',}),
         html.P(['You can search up a channels ID by name via this link ',\
             html.A('Youtube Channel ID Searcher',href='https://commentpicker.com/youtube-channel-id.php',target="_blank")]),
         dbc.Input(id="advance_channel_id",type="text",value='UCVjlpEjEY9GpksqbEesJnNA'),
         html.Br(),
         html.P('Paste Video Name',style={'font-weight': 'bold','font-size':'17px',}),
-        dbc.Input(id="advance_video_name",type="text",value='Uncle Roger LOVE The OG Uncle (Martin Yan)'),
+        dbc.Input(id="advance_video_name",type="text",value='Uncle Roger Review OG UNCLE Mongolian Beef (Martin Yan)'),
         html.Br(),
         #Submit button
         dbc.Button(id='advance_submit_button',n_clicks=0,children='Start Advance Analysis'),
@@ -120,25 +124,28 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     """ Creates analysis object """
     #initialising
     main = MainManager(channel_id,video_name)
-    
-    # get target video df
-    df = main.get_target_data()
-    cdf = dbc.Table.from_dataframe(df)
-    
-    # initialising Visual manager
+     # initialising Visual manager
     vis = Visualise(channel_id)
     
     
-    # data for caption vis
-    caption = vis.caption()
+    # get target video df
+    main.get_data()
+    df = main.get_target_data()
     
-    """ NER vis """
+    #do nlp 
+    main.nlp()
+    
+    """ Visualisation"""
+    #video data 
+    cdf = dbc.Table.from_dataframe(df)
+    #captions
+    caption = vis.caption()
+    #ner
     per = vis.per()
     org = vis.org()
     loc = vis.loc()
     msc = vis.msc()
-    
-    """ SA vis """
+    #vis
     sa_bar = vis.sa_bar()
 
     
