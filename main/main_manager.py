@@ -8,9 +8,15 @@ import sqlite3
 import sqlalchemy
 
 # adding modules path 
-sys.path.insert(0,'D:/python_projects/Youtube-Video-Analyser-GUI-Version/etl')
-sys.path.insert(1,'D:/python_projects/Youtube-Video-Analyser-GUI-Version/youtube_api')
-sys.path.insert(2,'D:/python_projects/Youtube-Video-Analyser-GUI-Version/nlp')
+project_dir=os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+etl_dir = project_dir+'/etl'
+youtube_api_dir = project_dir+'/youtube_api'
+nlp_dir = project_dir+'/nlp'
+
+
+sys.path.append(etl_dir)
+sys.path.append(youtube_api_dir)
+sys.path.append(nlp_dir)
 
 # loading modules
 from ytchannel import Ytchannel
