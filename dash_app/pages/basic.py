@@ -28,7 +28,7 @@ layout = html.Div(
         html.Br(style={"line-height": "5px"}),
         #inputs
         html.H4('Usage Guidelines: '),
-        html.Li('Basic analysis takes 1-2 minutes. Demo values below will display pre-analysed results.',style={'color':'red'}),
+        html.Li('Basic analysis takes around 10 seconds. Demo values below will display pre-analysed results.',style={'color':'red'}),
         html.Li('Video name must be exactly the same as the title on the video page.',style={'color':'red'}),
         html.Li('If input is correct, loading screen and results will appear, if not then input is incorrect.',style={'color':'red'}),
         html.Br(),

@@ -37,7 +37,7 @@ class DBmanager:
         
     def df_to_db(self,db: str, df: pd.DataFrame,df_name: str) -> None:
         conn = self.connect(db)
-        df.to_sql(df_name,conn,index=False,if_exists='fail')
+        df.to_sql(df_name,conn,index=False,if_exists='replace')
         conn.close()
         
     def dflist_to_db(self,db:str ,dflist: list[pd.DataFrame]) -> None:

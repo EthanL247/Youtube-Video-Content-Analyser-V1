@@ -31,6 +31,7 @@ layout = html.Div(
         html.Li('Advance analysis takes 6-8 minutes of processing time. Demo values below will display pre-analysed results.',style={'color':'red'}),
         html.Li('Video name must be exactly the same as the title on the video page.',style={'color':'red'}),
         html.Li('If input is correct, loading screen and results will appear, if not then input is incorrect.',style={'color':'red'}),
+        html.Li('Note that some videos have captions disabled and no results wil be displayed.',style={'color':'red'}),
         html.Br(),
         html.P('Paste Channel ID',style={'font-weight': 'bold','font-size':'17px',}),
         html.P(['You can search up a channels ID by name via this link ',\
@@ -132,7 +133,7 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     main.get_data()
     df = main.get_target_data()
     
-    #do nlp 
+    #do nlp
     main.nlp()
     
     """ Visualisation"""
