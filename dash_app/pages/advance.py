@@ -58,14 +58,6 @@ layout = html.Div(
             ]
         ),
         html.Br(),
-        #summarise visualisation
-        html.Br(),
-        html.Div([
-        html.H2("Too Long ; Didn't Watch Summarisation Result"),
-        html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
-        html.B(id='summarise_output', style={'font-size':'1.428571rem'})
-        ]),
-        html.Br(),
         html.Br(),
         html.Br(),
         
@@ -109,7 +101,6 @@ layout = html.Div(
 @callback(
     [
     Output(component_id='advance_output',component_property='children'),
-    Output(component_id='summarise_output',component_property='children'),
     Output(component_id='per_output',component_property='children'),
     Output(component_id='org_output',component_property='children'),
     Output(component_id='loc_output',component_property='children'),
@@ -142,8 +133,6 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     """ Visualisation"""
     #video data 
     cdf = dbc.Table.from_dataframe(df)
-    #captions
-    caption = vis.caption()
     #ner
     per = vis.per()
     org = vis.org()
@@ -154,7 +143,7 @@ def create_anlaysis(n_clicks,channel_id,video_name):
 
     
     
-    return cdf,caption,per,org,loc,msc,sa_bar
+    return cdf,per,org,loc,msc,sa_bar
     
     
 

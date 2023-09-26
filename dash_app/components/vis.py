@@ -120,15 +120,6 @@ class Visualise:
         fig.update_traces(marker=dict(size=12))
         return fig
         
-        
-    
-    def caption(self) -> str:
-        """ Returns caption to be displayed """
-        df = self.get_df('Words_Data')
-        summary_entry = list(df['Summarised_Captions'].values)[0]
-        summary_res = summary_entry.strip('[{]}:""')[17:]
-        return summary_res
-    
 
     def loc(self) ->object:
         """ Gets all ner LOC data from db """

@@ -39,12 +39,6 @@ layout = html.Div(
                     [
                         dbc.Col(
                             [
-                                html.Li('Summarisation',style={'font-weight': 'bold','font-size':'20px',}),
-                                html.P('Summarise an entire videos caption to just a few sentences.',style={'font-size':'17px'}),  
-                            ]
-                        ),
-                        dbc.Col(
-                            [
                                 html.Li('Named-Entity Recognition (NER)',style={'font-weight': 'bold','font-size':'20px',}),
                                 html.P('Extracts most mentioned individuals name, organisation and location from a video.',style={'font-size':'17px'}),
                 
@@ -96,7 +90,7 @@ layout = html.Div(
                         ),
                     ]
                 ),
-        html.Img(src=image1),
+        html.Img(src=image1,style ={'width':'95%','height':'100%'}),
         #Limitations
         html.Div(
             [
