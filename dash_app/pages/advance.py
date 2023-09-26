@@ -12,8 +12,11 @@ dash.register_page(__name__, order=3, name='Advanced Machine Learning Analysis')
 
 
 #adding module paths
-sys.path.insert(0,'D:/python_projects/Youtube-Video-Analyser-GUI-Version/main')
-sys.path.insert(0, 'D:/python_projects/Youtube-Video-Analyser-GUI-Version/dash_app/components')
+project_dir=os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+main_dir = project_dir +'/main'
+components_dir = project_dir +'/dash_app/components'
+sys.path.append(main_dir)
+sys.path.append(components_dir)
 
 #importing custom modules
 from main_manager import MainManager
