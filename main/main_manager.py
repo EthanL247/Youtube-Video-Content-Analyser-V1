@@ -24,7 +24,6 @@ from ytvideo import Ytvideo
 from etldf import EtlDF
 from dbmanager import DBmanager
 from transcribe import Transcribe
-from nlp_summarisation import Summariser
 from nlp_sa import SA
 from nlp_ner import NER
 from etldf import EtlDF
@@ -38,7 +37,6 @@ channel_manage = Ytchannel()
 video_manage = Ytvideo()
 etldf = EtlDF()
 tm = Transcribe()
-sm = Summariser()
 sam = SA()
 nerm = NER()
 etldfm = EtlDF()
@@ -100,30 +98,26 @@ class MainManager:
         
     def _do_nlp(self,caption) -> None:
         """ does nlp from target video caption """
-        summarise = sm.summarise(caption,self.limit)
         sa = sam.sa(caption,self.limit)
         ner = nerm.ner(caption,self.limit)
-        return (caption,summarise,sa,ner)
+        return (sa,ner)
     
     def _etl_nlp(self,caption) -> None:
         """ etl target nlp data """
-        caption,summarise,sa,ner = self._do_nlp(caption)
+        sa,ner = self._do_nlp(caption)
         #Transform data 
         sa_data = etlsam.direct_etl(sa)
         ner_data = etlnerm.direct_etl(ner)
         # convert to data frame
-        words_df = etldf.words_dataframe(caption,summarise)
         sa_df = etldf.sa_dataframe(sa_data)
         ner_df = etldf.ner_dataframe(ner_data)
-        return (words_df,sa_df,ner_df)
+        return (sa_df,ner_df)
     
     def nlp(self) -> None:
         caption = self._get_caption()
-        words,sa,ner = self._etl_nlp(caption)
-        words_name = 'Words_Data'
+        sa,ner = self._etl_nlp(caption)
         sa_name = 'SA_Data'
         # upload as sqlite db 
-        dbm.df_to_db(self.db_name,words,words_name)
         dbm.df_to_db(self.db_name,sa,sa_name)
         dbm.dflist_to_db(self.db_name,ner)
         

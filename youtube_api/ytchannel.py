@@ -8,7 +8,8 @@ class Ytchannel:
     def __init__(self):
         self.name = 'youtube'
         self.service = 'v3'
-        self.api_key = 'AIzaSyDMg2PyJVlG9sj79VXnlffmlD86wEHzXxI'
+        #Enter Your Youtube API Key Here
+        self.api_key = 'ENTER YOUR YOUTUBE API KEY HERE '
     
     def _start(self) -> object:
         """ Returns youtube service object """ 

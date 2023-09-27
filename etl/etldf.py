@@ -37,18 +37,8 @@ class EtlDF:
         df = pd.DataFrame(sa, columns=sa.keys(), dtype=float)
         return df 
     
-    def sum_dataframe(self, transcript: dict[dict[list]]) -> pd.DataFrame:
-        """ converts etl captions results to dataframe """
-        df = pd.DataFrame(transcript, columns = transcript.keys(), dtype=str)
-        return df 
-    
     def captions_dataframe(self, captions: dict[dict[list]]) -> pd.DataFrame:
         df = pd.DataFrame(captions, columns = captions.keys(), dtype=str)
         return df 
     
-    def words_dataframe(self, captions: dict[dict[list]], summarised = dict[dict[list]]) -> pd.DataFrame:
-        cdf = self.captions_dataframe(captions)
-        sdf = self.sum_dataframe(summarised)
-        wdf = pd.concat([cdf,sdf], axis = 1)
-        return wdf 
         

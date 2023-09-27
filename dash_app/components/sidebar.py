@@ -36,7 +36,7 @@ class SideBar:
     def use(self):
         return html.Div(
             [
-                html.H3("Youtube Video Analyser Version", className="display-5"),
+                html.H3("Youtube Video Content Analyser"),
                 html.H3('Version 1.0'),
                 self.darkmode(),
                 html.Br(),
@@ -54,14 +54,19 @@ class SideBar:
                     pills = True,
                 ),
                 #credits
-                html.Br(),
                 html.Hr(style={'borderWidth': "1px", "width": "100%", "color": "#28948c"}),
                 html.Div([
                     html.B('Made By Ethan C Liu'),
                     html.Br(),
+                    html.P('Thank you for using my web app!Contacts below:'),
                     html.A('LinkedIn',href='https://www.linkedin.com/in/ecl97/',target="_blank"),
                     html.Br(),
                     html.A('GitHub',href='https://github.com/EthanL247',target="_blank"),
+                    html.Br(),
+                    html.Br(),
+                    html.P(['V2 with Django, Postgres and AWS is currently WIP. Track  ',\
+                        html.A('here.',href='https://github.com/EthanL247/Youtube-Video-Content-Analyser-Version-2',target="_blank"),]),
+                    
                     
                 ])
             ],
