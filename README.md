@@ -11,7 +11,7 @@ Youtube Video Analyser (YVA) is web application that leverages natural langauge 
 * **Custom Engagement Metrics** Plots custom metrics such as likes to comment ratio across 50 latest videos
 
 ## Technology and Architecture
-![alt text]('techmap.png')
+![alt text](techmap.png)
 
 ### Core technology and frameworks used:
 **Testing:**
