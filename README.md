@@ -1,8 +1,8 @@
-# Youtube Video Analyser (Version 1.0)
+# Youtube Video Content Analyser (Version 1.0)
 ## Use it here: http://ethanl247.pythonanywhere.com/
 
 ## Introduction
-Youtube Video Analyser (YVA) is web application that leverages natural langauge processing (NLP) via machine learning, to give insight about a Youtube video without ever watching it.  
+Youtube Video Content Analyser (YVCA) is web application that leverages natural langauge processing (NLP) via machine learning, to give insight about a Youtube video without ever watching it.  
 ![alt text](sa_demo.png)
 ![alt text](basic_demo.png)
 ### Current Features:
