@@ -33,7 +33,8 @@ layout = html.Div(
         html.Br(style={"line-height": "5px"}),
         #inputs
         html.H4('Usage Guidelines: '),
-        html.Li('Basic analysis takes around 10 seconds. Demo values below will display pre-analysed results.',style={'color':'red'}),
+        html.Li('App can only fetch the latest 50 videos uploaded from a channel due to Youtube API limitations.',style={'color':'red'}),
+         html.Li("Don't have a video in mind? Try the demo values already in the input box.",style={'color':'red'}),
         html.Li('Video name must be exactly the same as the title on the video page.',style={'color':'red'}),
         html.Li('If input is correct, loading screen and results will appear, if not then input is incorrect.',style={'color':'red'}),
         html.Br(),

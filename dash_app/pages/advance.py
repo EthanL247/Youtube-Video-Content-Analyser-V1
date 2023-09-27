@@ -31,10 +31,10 @@ layout = html.Div(
         html.Br(),
         #inputs
         html.H4('Usage Guidelines: '),
-        html.Li('Advance analysis takes about a minute. Demo values below will display pre-analysed results.',style={'color':'red'}),
+        html.Li('App can only fetch the latest 50 videos uploaded from a channel due to Youtube API limitations.',style={'color':'red'}),
+        html.Li("Don't have a video in mind? Try the demo values already in the input box.",style={'color':'red'}),
         html.Li('Video name must be exactly the same as the title on the video page.',style={'color':'red'}),
         html.Li('If input is correct, loading screen and results will appear, if not then input is incorrect.',style={'color':'red'}),
-        html.Li('Note that some videos have captions disabled and no results wil be displayed.',style={'color':'red'}),
         html.Br(),
         html.P('Paste Channel ID',style={'font-weight': 'bold','font-size':'17px',}),
         html.P(['You can search up a channels ID by name via this link ',\
