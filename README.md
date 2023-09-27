@@ -2,8 +2,9 @@
 ## Use it here: http://ethanl247.pythonanywhere.com/
 
 ## Introduction
-Youtube Video Analyser (YVA) is web application that leverages natural langauge processing (NLP) via machine learning, to give insight about a Youtube video without ever watching it.
-
+Youtube Video Analyser (YVA) is web application that leverages natural langauge processing (NLP) via machine learning, to give insight about a Youtube video without ever watching it.  
+![alt text](sa_demo.png)
+![alt text](basic_demo.png)
 ### Current Features:
 * **Entity-Named Recognition (NER)** Extracts the most mentioned nouns of people, locations and organisations in a video.
 * **Sentiment Analysis** Classifies the most releveant emotions invoked by a video.
@@ -15,19 +16,19 @@ Youtube Video Analyser (YVA) is web application that leverages natural langauge 
 
 ### Core technology and frameworks used:
 **Testing:**
-* Pytest
+* Pytest  
 **Backend:**
 * Pandas
 * Sqlite
 * Transformers library
 * Pytorch
-* Google-API-Python-Client
+* Google-API-Python-Client  
 **FrontEnd:**
 * Dash
 * Dash Bootstrap Components
 * Dash Core Components
 * Flask
-* Plotly
+* Plotly  
 **Deployment**
 * Python Anywhere
 
