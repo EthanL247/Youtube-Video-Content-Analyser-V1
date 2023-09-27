@@ -31,6 +31,7 @@ layout = html.Div(
         html.Br(),
         #inputs
         html.H4('Usage Guidelines: '),
+        html.Li('Advance analysis takes about 50 seconds to a minute.',style={'color':'red'}),
         html.Li('App can only fetch the latest 50 videos uploaded from a channel due to Youtube API limitations.',style={'color':'red'}),
         html.Li("Don't have a video in mind? Try the demo values already in the input box.",style={'color':'red'}),
         html.Li('Video name must be exactly the same as the title on the video page.',style={'color':'red'}),
@@ -57,6 +58,14 @@ layout = html.Div(
                 html.Div(id='advance_output')
             ]
         ),
+        html.Br(),
+        #summarise visualisation
+        html.Br(),
+        html.Div([
+        html.H2("Too Long ; Didn't Watch Summarisation Result"),
+        html.Hr(style={'borderWidth': "5px", "width": "100%", "color": "#28948c"}),
+        html.B(id='summarise_output', style={'font-size':'1.428571rem'})
+        ]),
         html.Br(),
         html.Br(),
         html.Br(),
@@ -101,6 +110,7 @@ layout = html.Div(
 @callback(
     [
     Output(component_id='advance_output',component_property='children'),
+    Output(component_id='summarise_output',component_property='children'),
     Output(component_id='per_output',component_property='children'),
     Output(component_id='org_output',component_property='children'),
     Output(component_id='loc_output',component_property='children'),
@@ -133,6 +143,8 @@ def create_anlaysis(n_clicks,channel_id,video_name):
     """ Visualisation"""
     #video data 
     cdf = dbc.Table.from_dataframe(df)
+    #captions
+    caption = vis.caption()
     #ner
     per = vis.per()
     org = vis.org()
@@ -143,7 +155,7 @@ def create_anlaysis(n_clicks,channel_id,video_name):
 
     
     
-    return cdf,per,org,loc,msc,sa_bar
+    return cdf,caption,per,org,loc,msc,sa_bar
     
     
 
