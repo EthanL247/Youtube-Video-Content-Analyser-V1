@@ -47,7 +47,7 @@ layout = html.Div(
                         dbc.Col(
                             [
                                 html.Li('Sentiment Analysis (SA)',style={'font-weight': 'bold','font-size':'20px',}),
-                                html.P('Extracts the most releveant emotions invoked by a video.',style={'font-size':'17px'}),   
+                                html.P('Classifies the most releveant emotions invoked by a video.',style={'font-size':'17px'}),   
                             ]
                         ),
                         
