@@ -14,21 +14,24 @@ Youtube Video Analyser (YVA) is web application that leverages natural langauge 
 ## Technology and Architecture
 ![alt text](techmap.png)
 
-### Core technology and frameworks used:
+### Core technology and frameworks used:   
 **Testing:**
-* Pytest  
+* Pytest     
+
 **Backend:**
 * Pandas
 * Sqlite
 * Transformers library
 * Pytorch
-* Google-API-Python-Client  
+* Google-API-Python-Client     
+
 **FrontEnd:**
 * Dash
 * Dash Bootstrap Components
 * Dash Core Components
 * Flask
-* Plotly  
+* Plotly     
+  
 **Deployment**
 * Python Anywhere
 
