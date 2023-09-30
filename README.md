@@ -26,7 +26,7 @@ Youtube Video Content Analyser (YVCA) is web application that leverages natural 
 * Pytorch
 * Google-API-Python-Client     
 
-**FrontEnd:**
+**Frontend:**
 * Dash
 * Dash Bootstrap Components
 * Dash Core Components
