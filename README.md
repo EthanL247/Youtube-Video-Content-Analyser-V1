@@ -6,7 +6,7 @@ Youtube Video Content Analyser (YVCA) is web application that leverages natural 
 ![alt text](sa_demo.png)
 ![alt text](basic_demo.png)
 ### Current Features:
-* **Summarisation** Sumarises the entire caption of a video into a few short sentences.        
+* **Summarisation** Summarises the entire caption of a video into a few short sentences.        
 * **Entity-Named Recognition (NER)** Extracts the most mentioned nouns of people, locations and organisations in a video.
 * **Sentiment Analysis** Classifies the most releveant emotions invoked by a video.
 * **Common Metric Reports** Plots view, like and comment counts across 50 latest videos.
@@ -21,8 +21,8 @@ Youtube Video Content Analyser (YVCA) is web application that leverages natural 
 
 **Backend:**
 * Pandas
-* Sqlite
-* Transformers library
+* SQLite
+* Transformers NLP Library
 * Pytorch
 * Google-API-Python-Client     
 
@@ -43,7 +43,7 @@ Youtube Video Content Analyser (YVCA) is web application that leverages natural 
 3. Run dash_app\app.py. 
 
 ## Limitations and Future
-This app is whilst usable is still being worked on and therefore has the following limitations:
+This app is still being worked on and therefore has the following limitations:
 1. App can only detect the latest 50 videos uploaded by a channel due to Youtube API free-tier limitations.
 2. Pasted channel id and video name must be exact.
 
