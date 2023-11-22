@@ -15,6 +15,9 @@ Youtube Video Content Analyser (YVCA) is web application that leverages natural 
 ## Technology and Architecture
 ![alt text](techmap.png)
 
+## Testing ##
+* Contains testing for main interface layer and backend machine learning layer in /tests * 
+
 ### Core technology and frameworks used:   
 **Testing:**
 * Pytest     
